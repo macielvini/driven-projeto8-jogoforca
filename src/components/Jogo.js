@@ -3,10 +3,14 @@ import Palavras from "./Palavras";
 
 export default function Jogo() {
 
-  const [palavra, setPalavra] = React.useState("teste");
+  let palavra = "";
+  const [underlines, setUnderlines] = React.useState();
 
   function sortearPalavra() {
-    setPalavra(Palavras().toUpperCase());
+    palavra = Palavras().toUpperCase();
+
+    let palavraArr = [...palavra];
+    setUnderlines(palavraArr.map(() => "_"))
   }
 
   return (
@@ -16,7 +20,7 @@ export default function Jogo() {
       </div>
       <div class="direita">
         <button class="escolher-palavra" onClick={sortearPalavra}>Escolher palavra</button>
-        <p>{palavra}</p>
+        <p>{underlines}</p>
       </div>
     </div>
   )
