@@ -82,12 +82,13 @@
   border: 1px solid black;
 }
 
-.controles .letras li button:active {
-  background-color: lightskyblue;
-}
-
-.controles .letras li button:disabled {
+/* .controles .letras li button:disabled {
   background-color: lightcoral;
+} */
+
+.controles .letras li .desativado {
+  background-color: lightcoral;
+  pointer-events: none;
 }
 
 .controles .chutar {

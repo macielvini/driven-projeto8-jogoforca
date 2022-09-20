@@ -26,5 +26,5 @@ export default function Palavras() {
 
   const index = Math.floor(Math.random() * palavras.length);
 
-  return (palavras[index])
+  return (palavras[index]);
 }
