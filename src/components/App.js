@@ -1,26 +1,20 @@
+import Jogo from "./Jogo";
+import Letras from "./Letras";
+
 export default function App() {
+  const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
   return (
     <div class="container" >
       <div>
 
-        <div class="topo">
-          <div class="forca">
-            <img src="assets/forca0.png" alt="forca" />
-          </div>
-          <div class="direita">
-            <button class="escolher-palavra">Escolher palavra</button>
-            <p>______________</p>
-          </div>
-        </div>
+        <Jogo />
 
         <div class="controles">
 
           <div class="letras">
             <ul>
-              <li> <button>A</button></li>
-              <li> <button>B</button></li>
-              <li><button disabled="disabled">C</button></li>
-
+              {alfabeto.map((l) => <Letras letra={l} />)}
             </ul>
           </div>
 
