@@ -24,7 +24,7 @@ export default function Palavras() {
     "xícara", "xadrez", "xilofone", "xarope", "xenofobia", "xereta", "xerife", "xaveco", "xixi", "xale",
     "zebra", "zagueiro", "zero", "zoeira", "zodíaco", "zangão", "zepelim", "zinco", "zoológico", "zumbido"];
 
-  const index = Math.floor(Math.random() * palavras.length);
+  const index = Math.floor(Math.random() * (palavras.length - 1));
 
   return (palavras[index]);
 }

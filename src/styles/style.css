@@ -67,27 +67,34 @@
 }
 
 .controles .letras ul {
-  display: flex;
+  display: grid;
   gap: 10px;
+  grid-template-columns: repeat(13, auto);
 }
 
-.controles .letras li button,
+.controles .letras li,
 .chutar button {
+  width: 30px;
+  height: 30px;
+
   font-size: 16px;
-  color: black;
+  color: blue;
+
+  text-align: center;
+  line-height: 30px;
 
   background-color: lightblue;
-  padding: 10px;
   border-radius: 5px;
-  border: 1px solid black;
+  outline: 1px solid blue;
+
+  cursor: pointer;
 }
 
-/* .controles .letras li button:disabled {
-  background-color: lightcoral;
-} */
-
-.controles .letras li .desativado {
-  background-color: lightcoral;
+.controles .letras li.desativado {
+  color: #1b1b1b;
+  outline: 1px solid #1b1b1b;
+  background-color: lightgray;
+  opacity: 0.8;
   pointer-events: none;
 }
 
@@ -109,4 +116,8 @@
   border-radius: 5px;
   padding: 10px;
   min-width: 50%;
+}
+
+.controles button {
+  width: 80px;
 }

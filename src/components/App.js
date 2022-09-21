@@ -2,30 +2,32 @@ import React from "react";
 import Palavras from "./Palavras";
 
 export default function App() {
+  const [letrasAtivado, setLetrasAtivado] = React.useState("desativado");
 
   return (
-    <div class="container" >
+    <div className="container" >
       <div>
-        <Jogo />
-        <div class="controles">
-          <Letras />
+        <Jogo setLetrasAtivado={setLetrasAtivado} />
+        <div className="controles">
+          <Letras status={letrasAtivado} />
           <Chute />
         </div>
       </div >
     </div>
   )
 }
+
 function Chute() {
   return (
-    <div class="chutar">
-      <label for="chute">Já sei palavra: </label>
+    <div className="chutar">
+      <label htmlFor="chute">Já sei palavra: </label>
       <input type="text" name="" id="chute" />
       <button>Chutar</button>
     </div>
   )
 }
 
-function Jogo() {
+function Jogo(props) {
 
   let palavra = "";
   const [underlines, setUnderlines] = React.useState("Sorteie a primeira palavra");
@@ -35,39 +37,42 @@ function Jogo() {
 
     let palavraArr = [...palavra];
     setUnderlines(palavraArr.map(() => "_"));
+    props.setLetrasAtivado("ativado");
   }
 
   return (
-    <div class="jogo">
-      <div class="forca">
+    <div className="jogo">
+      <div className="forca">
         <img src="assets/forca0.png" alt="forca" />
       </div>
-      <div class="direita">
-        <button class="escolher-palavra" onClick={sortearPalavra}>Escolher palavra</button>
+      <div className="direita">
+        <button className="escolher-palavra" onClick={sortearPalavra}> Escolher palavra</button>
         <p>{underlines}</p>
       </div>
-    </div>
+    </div >
   )
 }
 
-function Letras() {
+function Letras(props) {
+
+  const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
 
   return (
-    <div class="letras">
+    <div className="letras">
       <ul>
-        {alfabeto.map((l) => <Letra letra={l} />)}
+        {alfabeto.map((l, i) => <Letra letra={l} key={i} status={props.status} />)}
       </ul>
     </div>
 
   )
 }
 
-const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
-function Letra(props = "") {
-  const { estaAtivado, letra } = props;
+function Letra(props) {
+  const { letra, status } = props;
 
   return (
-    <li> <button className={estaAtivado}>{letra.toUpperCase()}</button></li>
+    <li className={status}>{letra.toUpperCase()}</li>
   )
 }
