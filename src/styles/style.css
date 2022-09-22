@@ -23,8 +23,9 @@
 }
 
 .jogo {
-  width: 100%;
+  width: 800px;
   display: flex;
+  justify-content: space-between;
 
   height: 500px;
 }
