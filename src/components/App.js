@@ -7,6 +7,21 @@ export default function App() {
   const [letrasClicadas, setLetrasClicadas] = React.useState(alfabeto);
   let palavra = "";
   const [resposta, setResposta] = React.useState("Sorteie a primeira palavra");
+  const [erros, setErros] = React.useState(0);
+
+  function atualizarForca() {
+    if (erros !== 6) setErros(erros + 1);
+  }
+
+  function verificarPalavra(palavra) {
+    setResposta([...palavra].map(() => "_"));
+  }
+
+  function iniciarJogo() {
+    setErros(0);
+    setLetrasClicadas([]);
+    verificarPalavra(Palavras());
+  }
 
   function Chute() {
     return (
@@ -22,18 +37,14 @@ export default function App() {
     return (
       <div className="jogo">
         <div className="forca">
-          <img src="assets/forca0.png" alt="forca" />
+          <img src={`assets/forca${erros}.png`} alt="forca" onClick={iniciarJogo} />
         </div>
         <div className="direita">
-          <button className="escolher-palavra" onClick={() => setLetrasClicadas([])}>Escolher palavra</button>
+          <button className="escolher-palavra" onClick={iniciarJogo}>Escolher palavra</button>
           <p>{resposta}</p>
         </div>
       </div >
     )
-  }
-
-  function verificarPalavra(palavra, setUnderlines) {
-    setUnderlines([...palavra].map(() => "_"));
   }
 
   function Alfabeto() {
@@ -60,7 +71,6 @@ export default function App() {
       <li key={index} className={letrasClicadas.includes(letra) ? "desativado" : ""} onClick={desativar}>{letra.toUpperCase()}</li>
     )
   }
-
 
   return (
     <div className="container" >
