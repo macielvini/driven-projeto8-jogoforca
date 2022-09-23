@@ -60,6 +60,12 @@
 
 .direita .errou {
   color: red;
+  font-weight: 700;
+}
+
+.direita .acertou {
+  color: #27ae60;
+  font-weight: 700;
 }
 
 .controles {

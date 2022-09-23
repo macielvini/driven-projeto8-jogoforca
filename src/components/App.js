@@ -17,11 +17,11 @@ export default function App() {
 
   function atualizarForca() {
     if (erros < 6) setErros(erros + 1);
-    if (erros + 1 === 6) finalizarJogo();
+    if (erros + 1 === 6) finalizarJogo("errou");
   }
 
-  function finalizarJogo() {
-    setResultado("errou");
+  function finalizarJogo(resultado) {
+    setResultado(resultado);
     setUnderlines(palavra);
     setLetrasClicadas(alfabeto);
   }
@@ -44,6 +44,10 @@ export default function App() {
       if (letraClicada === l) return letraClicada;
       return "_";
     })
+
+    if (newPalavra.toString().replaceAll(",", "") === palavra) {
+      finalizarJogo("acertou");
+    }
 
     setUnderlines(newPalavra);
   }
