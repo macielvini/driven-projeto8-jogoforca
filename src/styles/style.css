@@ -58,6 +58,10 @@
   letter-spacing: 4px;
 }
 
+.direita .errou {
+  color: red;
+}
+
 .controles {
   display: flex;
   flex-direction: column;

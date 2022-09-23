@@ -13,9 +13,17 @@ export default function App() {
   const [underlines, setUnderlines] = React.useState("Sorteie a primeira palavra");
   const [erros, setErros] = React.useState(0);
   const [palavra, setPalavra] = React.useState("");
+  const [resultado, setResultado] = React.useState("");
 
   function atualizarForca() {
-    if (erros !== 6) setErros(erros + 1);
+    if (erros < 6) setErros(erros + 1);
+    if (erros + 1 === 6) finalizarJogo();
+  }
+
+  function finalizarJogo() {
+    setResultado("errou");
+    setUnderlines(palavra);
+    setLetrasClicadas(alfabeto);
   }
 
   function mostrarPalavraNaTela(p) {
@@ -23,15 +31,20 @@ export default function App() {
     setUnderlines(palavraArr.map(() => "_"));
   }
 
-  function verificarLetra(letra) {
+  function verificarLetra(letraClicada) {
     const palavraArr = [...palavra];
+
+    if (palavraArr.includes(letraClicada) === false) {
+      atualizarForca();
+      return;
+    };
+
     const newPalavra = palavraArr.map((l, i) => {
       if (underlines[i] === l) return l;
-      if (letra === l) return l;
+      if (letraClicada === l) return letraClicada;
       return "_";
     })
 
-    print(newPalavra);
     setUnderlines(newPalavra);
   }
 
@@ -63,7 +76,7 @@ export default function App() {
         </div>
         <div className="direita">
           <button className="escolher-palavra" onClick={iniciarJogo}>Escolher palavra</button>
-          <p>{underlines}</p>
+          <p className={resultado}>{underlines}</p>
         </div>
       </div >
     )
@@ -86,8 +99,8 @@ export default function App() {
     const { letra, index } = props;
 
     function desativar() {
-      verificarLetra(letra);
       setLetrasClicadas([...letrasClicadas, letra]);
+      verificarLetra(letra);
     }
 
     return (
@@ -106,5 +119,5 @@ export default function App() {
       </div >
     </div>
   )
-}
 
+}
