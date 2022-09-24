@@ -83,7 +83,9 @@ export default function App() {
     }
 
     return (
-      <li key={index}
+      <li
+        data-identifier="letter"
+        key={index}
         className={letrasClicadas.includes(letra) ? "desativado" : ""}
         onClick={desativar}>
         {letra.toUpperCase()}
@@ -95,11 +97,11 @@ export default function App() {
     return (
       <div className="jogo">
         <div className="forca">
-          <img src={`assets/forca${erros}.png`} alt="forca" />
+          <img data-identifier="game-image" src={`assets/forca${erros}.png`} alt="forca" />
         </div>
         <div className="direita">
-          <button className="escolher-palavra" onClick={iniciarJogo}>{botao}</button>
-          <p className={resultado}>{underlines}</p>
+          <button className="escolher-palavra" onClick={iniciarJogo} data-identifier="choose-word">{botao}</button>
+          <p className={resultado} data-identifier="word">{underlines}</p>
         </div>
       </div >
     )
@@ -134,18 +136,20 @@ export default function App() {
       <div className="chutar">
         <label htmlFor="chute">Já sei palavra: </label>
         <input
+          data-identifier="type-guess"
           id="chute"
           type="text"
           value={inputChute}
           onChange={e => setInputChute(e.target.value)}
         />
-        <button onClick={chutarPalavra}>
+        <button
+          data-identifier="guess-button"
+          onClick={chutarPalavra}>
           Chutar
         </button>
       </div>
     )
   }
-
 
   return (
     <div className="container" >
