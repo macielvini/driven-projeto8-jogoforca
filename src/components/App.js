@@ -63,15 +63,35 @@ export default function App() {
     setLetrasClicadas([]);
     setPalavra(novaPalavra);
     mostrarPalavraNaTela(novaPalavra);
+    setResultado("");
     print(novaPalavra);
   }
 
   function Chute() {
+
+    const [inputChute, setInputChute] = React.useState("");
+
+    function chutarPalavra() {
+      if (removerAcento(inputChute) === removerAcento(palavra)) {
+        finalizarJogo("acertou");
+      } else {
+        finalizarJogo("errou");
+      }
+      setInputChute("");
+    }
+
     return (
       <div className="chutar">
         <label htmlFor="chute">Já sei palavra: </label>
-        <input type="text" name="" id="chute" />
-        <button>Chutar</button>
+        <input
+          id="chute"
+          type="text"
+          value={inputChute}
+          onChange={e => setInputChute(e.target.value)}
+        />
+        <button onClick={chutarPalavra}>
+          Chutar
+        </button>
       </div>
     )
   }
@@ -112,7 +132,11 @@ export default function App() {
     }
 
     return (
-      <li key={index} className={letrasClicadas.includes(letra) ? "desativado" : ""} onClick={desativar}>{letra.toUpperCase()}</li>
+      <li key={index}
+        className={letrasClicadas.includes(letra) ? "desativado" : ""}
+        onClick={desativar}>
+        {letra.toUpperCase()}
+      </li>
     )
   }
 
