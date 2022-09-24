@@ -15,6 +15,10 @@ export default function App() {
   const [palavra, setPalavra] = React.useState("");
   const [resultado, setResultado] = React.useState("");
 
+  function removerAcento(l) {
+    return l.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
+
   function atualizarForca() {
     if (erros < 6) setErros(erros + 1);
     if (erros + 1 === 6) finalizarJogo("errou");
@@ -34,14 +38,14 @@ export default function App() {
   function verificarLetra(letraClicada) {
     const palavraArr = [...palavra];
 
-    if (palavraArr.includes(letraClicada) === false) {
+    if (removerAcento(palavra).includes(letraClicada) === false) {
       atualizarForca();
       return;
     };
 
     const newPalavra = palavraArr.map((l, i) => {
       if (underlines[i] === l) return l;
-      if (letraClicada === l) return letraClicada;
+      if (letraClicada === removerAcento(l)) return l;
       return "_";
     })
 
