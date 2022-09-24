@@ -42,12 +42,12 @@
 }
 
 .direita button {
-  background-color: #27ae60;
-
+  background-color: #39b89a;
+  width: max-content;
   color: #fff;
   font-weight: 700;
-  font-size: 16px;
-  padding: 10px;
+  font-size: 20px;
+  padding: 15px;
 
   border-radius: 8px;
 }
@@ -59,12 +59,12 @@
 }
 
 .direita .errou {
-  color: red;
+  color: #ff5883;
   font-weight: 700;
 }
 
 .direita .acertou {
-  color: #27ae60;
+  color: #39b89a;
   font-weight: 700;
 }
 
@@ -89,34 +89,34 @@
   height: 30px;
 
   font-size: 16px;
-  color: blue;
+  color: #39b89a;
+  font-weight: 700;
 
   text-align: center;
   line-height: 30px;
 
-  background-color: lightblue;
+  background-color: #b9eee1;
   border-radius: 5px;
-  outline: 1px solid blue;
+  outline: 1px solid #39b89a;
 
   cursor: pointer;
 }
 
-.controles .letras li.desativado {
-  color: #1b1b1b;
-  outline: 1px solid #1b1b1b;
-  background-color: lightgray;
-  opacity: 0.8;
+.controles .letras li.desativado,
+.chutar button.desativado,
+input.desativado {
+  color: #fff;
+  outline: 1px solid #fff;
+  background-color: gray;
+  opacity: 0.5;
+  box-shadow: none;
 }
 
-.desativado {
-  pointer-events: none;
-}
-
-.controles .chutar {
+.chutar {
   width: 100%;
 }
 
-.controles .chutar {
+.chutar {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,13 +125,31 @@
   font-size: 16px;
 }
 
-.controles input {
-  border: 1px solid black;
+.chutar label {
+  color: #39b89a;
+  font-size: 20px;
+}
+
+.chutar input {
+  outline: 1px solid #b9eee1;
   border-radius: 5px;
   padding: 10px;
   min-width: 50%;
 }
 
-.controles button {
+.chutar button {
   width: 80px;
+  height: 30px;
+  transform: translateY(-5px);
+  box-shadow: 0 5px #39b89a;
+  transition: all 200ms ease;
+}
+
+.chutar button:active {
+  transform: translateY(2px);
+  box-shadow: 0 0px #39b89a;
+}
+
+.desativado {
+  pointer-events: none;
 }
