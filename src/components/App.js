@@ -15,6 +15,7 @@ export default function App() {
   const [palavra, setPalavra] = React.useState("");
   const [resultado, setResultado] = React.useState("");
   const [botao, setBotao] = React.useState("Começar");
+  const [status, setStatus] = React.useState("desativado");
 
   function removerAcento(l) {
     return l.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -30,6 +31,7 @@ export default function App() {
     setUnderlines(palavra);
     setLetrasClicadas(alfabeto);
     setBotao("Começar");
+    setStatus("desativado");
     if (resultado === "errou") {
       setErros(6);
     }
@@ -70,6 +72,7 @@ export default function App() {
     mostrarPalavraNaTela(novaPalavra);
     setResultado("");
     setBotao("Mudar palavra");
+    setStatus("");
     print(novaPalavra);
   }
 
@@ -136,6 +139,7 @@ export default function App() {
       <div className="chutar">
         <label htmlFor="chute">Já sei palavra: </label>
         <input
+          className={status}
           data-identifier="type-guess"
           id="chute"
           type="text"
@@ -143,6 +147,7 @@ export default function App() {
           onChange={e => setInputChute(e.target.value)}
         />
         <button
+          className={status}
           data-identifier="guess-button"
           onClick={chutarPalavra}>
           Chutar
