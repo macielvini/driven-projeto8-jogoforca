@@ -14,6 +14,7 @@ export default function App() {
   const [erros, setErros] = React.useState(0);
   const [palavra, setPalavra] = React.useState("");
   const [resultado, setResultado] = React.useState("");
+  const [botao, setBotao] = React.useState("Começar");
 
   function removerAcento(l) {
     return l.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -28,6 +29,10 @@ export default function App() {
     setResultado(resultado);
     setUnderlines(palavra);
     setLetrasClicadas(alfabeto);
+    setBotao("Começar");
+    if (resultado === "errou") {
+      setErros(6);
+    }
   }
 
   function mostrarPalavraNaTela(p) {
@@ -64,7 +69,52 @@ export default function App() {
     setPalavra(novaPalavra);
     mostrarPalavraNaTela(novaPalavra);
     setResultado("");
+    setBotao("Mudar palavra");
     print(novaPalavra);
+  }
+
+  function Letra(props) {
+
+    const { letra, index } = props;
+
+    function desativar() {
+      setLetrasClicadas([...letrasClicadas, letra]);
+      verificarLetra(letra);
+    }
+
+    return (
+      <li key={index}
+        className={letrasClicadas.includes(letra) ? "desativado" : ""}
+        onClick={desativar}>
+        {letra.toUpperCase()}
+      </li>
+    )
+  }
+
+  function Jogo() {
+    return (
+      <div className="jogo">
+        <div className="forca">
+          <img src={`assets/forca${erros}.png`} alt="forca" />
+        </div>
+        <div className="direita">
+          <button className="escolher-palavra" onClick={iniciarJogo}>{botao}</button>
+          <p className={resultado}>{underlines}</p>
+        </div>
+      </div >
+    )
+  }
+
+  function Alfabeto() {
+
+    return (
+      <div className="letras">
+        <ul>
+          {alfabeto.map((l, i, arr) => <Letra letra={l} key={i} arr={arr} />)}
+        </ul>
+      </div>
+
+    )
   }
 
   function Chute() {
@@ -96,49 +146,6 @@ export default function App() {
     )
   }
 
-  function Jogo() {
-    return (
-      <div className="jogo">
-        <div className="forca">
-          <img src={`assets/forca${erros}.png`} alt="forca" />
-        </div>
-        <div className="direita">
-          <button className="escolher-palavra" onClick={iniciarJogo}>Escolher palavra</button>
-          <p className={resultado}>{underlines}</p>
-        </div>
-      </div >
-    )
-  }
-
-  function Alfabeto() {
-
-    return (
-      <div className="letras">
-        <ul>
-          {alfabeto.map((l, i, arr) => <Letra letra={l} key={i} arr={arr} />)}
-        </ul>
-      </div>
-
-    )
-  }
-
-  function Letra(props) {
-
-    const { letra, index } = props;
-
-    function desativar() {
-      setLetrasClicadas([...letrasClicadas, letra]);
-      verificarLetra(letra);
-    }
-
-    return (
-      <li key={index}
-        className={letrasClicadas.includes(letra) ? "desativado" : ""}
-        onClick={desativar}>
-        {letra.toUpperCase()}
-      </li>
-    )
-  }
 
   return (
     <div className="container" >
