@@ -1,7 +1,14 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+
+  :root {
+    font-family: "Roboto", sans-serif;
+  }
+  
+  * {
+    box-sizing: border-box;
+}
 
 html,
 body,
@@ -139,3 +146,7 @@ input {
   color: inherit;
   background: none;
 }
+
+`;
+
+export default GlobalStyle;
